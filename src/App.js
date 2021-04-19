@@ -10,7 +10,7 @@ import Home from './features/home/Home';
 
 function App() {
   const token = useSelector(selectToken);
-  console.log(token)
+
   return (
     <div className="App">
       <BrowserRouter>

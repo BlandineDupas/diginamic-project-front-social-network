@@ -28,7 +28,8 @@ const initialState = {
         value: '',
         error: false,
         errorMessage: 'Les mots de passe doivent être identiques'
-    }
+    },
+    success: ''
 }
 
 export const addUserAsync = createAsyncThunk(
@@ -76,7 +77,7 @@ export const registerSlice = createSlice({
     extraReducers: (builder) => {
         builder
           .addCase(addUserAsync.fulfilled, (state, action) => {
-            // state.value = action.payload;
+            action.payload.error ? (state.success = action.payload.error) : state.success = true
           });
     },
 });
@@ -93,5 +94,6 @@ export const selectFirstname = (state) => state.register.firstname;
 export const selectEmail = (state) => state.register.email; 
 export const selectPassword = (state) => state.register.password; 
 export const selectPasswordCheck = (state) => state.register.passwordCheck; 
+export const selectSuccess = (state) => state.register.success;
 
 export default registerSlice.reducer;
