@@ -36,7 +36,7 @@ export const addUserAsync = createAsyncThunk(
     async (user) => {
       return await addUser(user);
     }
-  );
+);
 
 export const registerSlice = createSlice({
     name: 'register',
