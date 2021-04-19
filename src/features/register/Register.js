@@ -15,6 +15,7 @@ import {
     setError,
     addUserAsync,
     clearForm,
+    selectSuccess,
 } from './registerSlice';
 
 const Register = () => {
@@ -24,6 +25,7 @@ const Register = () => {
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
     const passwordCheck = useSelector(selectPasswordCheck);
+    const success = useSelector(selectSuccess);
 
     const checkForm = (evt) => {
         evt.preventDefault();
@@ -46,7 +48,8 @@ const Register = () => {
                 'password': password.value,
                 'email': email.value
             }));
-            dispatch(clearForm());
+
+            (success === true) && dispatch(clearForm());
         }
     }
 
@@ -60,6 +63,7 @@ const Register = () => {
     return (
         <form onSubmit={checkForm}>
             <legend>Inscription</legend>
+            <p>{success !== true && success}</p>
             <fieldset>
                 <Input
                     inputName="lastname"

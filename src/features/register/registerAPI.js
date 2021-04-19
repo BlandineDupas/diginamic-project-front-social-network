@@ -8,5 +8,7 @@ export const addUser = (user) => {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user)
         }
-    ).then((response) => response.json())
+    )
+    .then((response) => response.json())
+    .then(response => response.error && response)
 }
