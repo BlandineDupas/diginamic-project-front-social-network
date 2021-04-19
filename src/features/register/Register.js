@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // Components
 import Input from './Input';
@@ -102,6 +103,7 @@ const Register = () => {
                 ></Input>
             </fieldset>
             <button type="submit">S'inscrire</button>
+            <Link to="/login">Déjà inscrit ? Connectez-vous !</Link>
         </form>
     )
 };
