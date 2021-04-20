@@ -33,7 +33,8 @@ function App() {
           <Route exact path="/register" component={Register} />
           
           { !token && <Redirect from="/" to="/login" />}
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={() => <Home title="Accueil"></Home>} />
+          <Route exact path="/me" render={() => <Home title="Blandine Dupas"></Home>} />
 
         </Switch>
       </BrowserRouter>
