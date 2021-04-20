@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 // Components
 import Input from './Input';
 
+// Styles
+import './register.scss';
+
 // Reducer
 import {
     changeInputValue,
@@ -16,6 +19,7 @@ import {
     addUserAsync,
     clearForm,
     selectSuccess,
+    selectError
 } from './registerSlice';
 
 const Register = () => {
@@ -26,6 +30,7 @@ const Register = () => {
     const password = useSelector(selectPassword);
     const passwordCheck = useSelector(selectPasswordCheck);
     const success = useSelector(selectSuccess);
+    const error = useSelector(selectError);
 
     const checkForm = (evt) => {
         evt.preventDefault();
@@ -61,53 +66,53 @@ const Register = () => {
 
 
     return (
-        <form onSubmit={checkForm}>
+        <form onSubmit={checkForm} className="register">
             <legend>Inscription</legend>
-            <p>{success !== true && success}</p>
-            <fieldset>
-                <Input
-                    inputName="lastname"
-                    inputType="text"
-                    label="Nom"
-                    inputData={lastname}
-                    changeInputValue={changeInputValue}
-                    checkInput={checkLastname}
-                ></Input>
-                <Input
-                    inputName="firstname"
-                    inputType="text"
-                    label="Prénom"
-                    inputData={firstname}
-                    changeInputValue={changeInputValue}
-                    checkInput={checkFirstname}
-                ></Input>
-                <Input
-                    inputName="email"
-                    inputType="email"
-                    label="Email"
-                    inputData={email}
-                    changeInputValue={changeInputValue}
-                    checkInput={checkEmail}
-                ></Input>
-                <Input
-                    inputName="password"
-                    inputType="password"
-                    label="Mot de passe"
-                    inputData={password}
-                    changeInputValue={changeInputValue}
-                    checkInput={checkPassword}
-                ></Input>
-                <Input
-                    inputName="passwordCheck"
-                    inputType="password"
-                    label="Vérifiez le mot de passe"
-                    inputData={passwordCheck}
-                    changeInputValue={changeInputValue}
-                    checkInput={checkPasswordCheck}
-                ></Input>
-            </fieldset>
-            <button type="submit">S'inscrire</button>
             <Link to="/login">Déjà inscrit ? Connectez-vous !</Link>
+            
+            <Input
+                inputName="lastname"
+                inputType="text"
+                label="Nom"
+                inputData={lastname}
+                changeInputValue={changeInputValue}
+                checkInput={checkLastname}
+            ></Input>
+            <Input
+                inputName="firstname"
+                inputType="text"
+                label="Prénom"
+                inputData={firstname}
+                changeInputValue={changeInputValue}
+                checkInput={checkFirstname}
+            ></Input>
+            <Input
+                inputName="email"
+                inputType="email"
+                label="Email"
+                inputData={email}
+                changeInputValue={changeInputValue}
+                checkInput={checkEmail}
+            ></Input>
+            {error && <p className="error">{error}</p>}
+            <Input
+                inputName="password"
+                inputType="password"
+                label="Mot de passe"
+                inputData={password}
+                changeInputValue={changeInputValue}
+                checkInput={checkPassword}
+            ></Input>
+            <Input
+                inputName="passwordCheck"
+                inputType="password"
+                label="Vérifiez le mot de passe"
+                inputData={passwordCheck}
+                changeInputValue={changeInputValue}
+                checkInput={checkPasswordCheck}
+            ></Input>
+            
+            <button type="submit">S'inscrire</button>
         </form>
     )
 };

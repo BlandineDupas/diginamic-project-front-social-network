@@ -13,10 +13,10 @@ const Input = ({ inputName, label, inputType, inputData, changeInputValue, check
     }
 
     return (
-        <div>
-            <label htmlFor={inputName}>{label}</label>
-            <input type={inputType} name={inputName} id={inputName} value={inputData.value} onChange={(evt) => dispatch(changeInputValue({ 'inputName': inputName, 'inputValue': evt.target.value}))} onBlur={check}></input>
-            <p>{inputData.error && inputData.errorMessage}</p>
+        <div className="form-field">
+            <label htmlFor={inputName} className="form-field--label">{label}*</label>
+            <input className="form-field--input" type={inputType} name={inputName} id={inputName} value={inputData.value} onChange={(evt) => dispatch(changeInputValue({ 'inputName': inputName, 'inputValue': evt.target.value}))} onBlur={check}></input>
+            { inputData.error && <p className="form-field--error error">{inputData.errorMessage}</p>}
         </div>
     )
 };

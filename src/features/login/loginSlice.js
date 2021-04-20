@@ -5,8 +5,9 @@ import { logUser } from "./loginAPI";
 const initialState = {
     email: '',
     password: '',
+    error: false,
     token: false,
-    user: {}
+    user: {},
 };
 
 export const userLoginAsync = createAsyncThunk(
@@ -20,6 +21,17 @@ export const loginSlice = createSlice({
     reducers: {
         changeInputValue: (state, action) => {
             state[action.payload.inputName] = action.payload.inputValue;
+        },
+        setError: (state, action) => {
+            state.error = action.payload;
+        },
+        clearForm: (state) => {
+            return {
+                ...state,
+                email: '',
+                password: '',
+                error: false            
+            }
         }
     },
     extraReducers: (builder) => {
@@ -35,11 +47,14 @@ export const loginSlice = createSlice({
 
 export const {
     changeInputValue,
+    setError,
+    clearForm
 } = loginSlice.actions;
 
 export const selectEmail = (state) => state.login.email;
 export const selectPassword = (state) => state.login.password;
 export const selectToken = (state) => state.login.token;
 export const selectUser = (state) => state.login.user;
+export const selectError = (state) => state.login.error;
 
 export default loginSlice.reducer;
