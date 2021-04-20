@@ -1,30 +1,45 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+// Components
 import Input from "./Input"
 
+// Styles
+import './login.scss';
+
+// Reducer
 import {
     changeInputValue,
     selectEmail,
+    selectError,
     selectPassword,
-    userLoginAsync
+    userLoginAsync,
+    setError
 } from './loginSlice';
 
 const Login = () => {
     const dispatch = useDispatch();
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
+    const error = useSelector(selectError);
 
     const userLogin = (evt) => {
         evt.preventDefault();
-        dispatch(userLoginAsync({
-            email,
-            password
-        }))
+        if (email && password) {
+            dispatch(userLoginAsync({
+                email,
+                password
+            }));
+        } else {
+            dispatch(setError("Les deux champs doivent être remplis"));
+        }
     }
 
     return (
-        <form onSubmit={userLogin}>
+        <form onSubmit={userLogin} className="login">
             <legend>Se connecter</legend>
+            <Link to="/register">Pas encore de compte ? Inscrivez-vous !</Link>
+
             <Input
                 inputName="email"
                 inputType="email"
@@ -39,8 +54,9 @@ const Login = () => {
                 inputData={password}
                 changeInputValue={changeInputValue}
             ></Input>
+            {(typeof error === 'string') && <p className="error">{error}</p>}
+            
             <button type="submit">Connexion</button>
-            <Link to="/register">Pas encore de compte ? Inscrivez-vous !</Link>
         </form>
     )
 }

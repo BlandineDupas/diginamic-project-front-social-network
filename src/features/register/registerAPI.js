@@ -10,5 +10,4 @@ export const addUser = (user) => {
         }
     )
     .then((response) => response.json())
-    .then(response => response.error && response)
 }
