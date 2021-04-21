@@ -1,11 +1,18 @@
+import { useSelector } from "react-redux";
+
 import { changeDateFormat } from "../../selectors";
 
+// Reducer
+import { selectUser } from "../login/loginSlice";
+
 const Comment = ({ comment }) => {
+    const user = useSelector(selectUser);
+
     return (
         <article className="comment">
             <header>
                 <p>
-                    <span className="comment-author">{comment.USER.firstname} {comment.USER.lastname}</span>
+                    <span className="comment-author">{comment.USER ? comment.USER.firstname : user.firstname} {comment.USER ? comment.USER.lastname : user.lastname}</span>
                     , le 
                     <span className="comment-date"> {changeDateFormat(comment.createdAt)}</span>
                 </p>

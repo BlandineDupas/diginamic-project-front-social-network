@@ -20,6 +20,7 @@ import {
     selectSendedMessages
 } from "../postForm/postFormSlice";
 import Message from "../message/Message";
+import { clearSendedComments } from "../commentForm/commentFormSlice";
 
 // let messages = [
 //     {
@@ -73,7 +74,8 @@ const Home = ({ title, userId }) => {
             token,
             userId
         }));
-        dispatch(clearSendedMessages())
+        dispatch(clearSendedMessages());
+        dispatch(clearSendedComments());
     }, [title])
     
     return (

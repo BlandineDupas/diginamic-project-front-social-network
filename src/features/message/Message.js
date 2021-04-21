@@ -12,9 +12,12 @@ import { selectUser } from '../login/loginSlice';
 
 // Styles
 import './message.scss';
+import { selectSended, selectSendedComments } from '../commentForm/commentFormSlice';
 
 const Message = ({ message }) => {
     const user = useSelector(selectUser);
+    const sended = useSelector(selectSended);
+    const sendedComments = useSelector(selectSendedComments);
 
     return (
         <article className="message">
@@ -24,6 +27,9 @@ const Message = ({ message }) => {
             </header>
             <p className="message-content">{message.content}</p>
             <CommentForm messageId={message.id}></CommentForm>
+            { sended && sendedComments.map((comment) => 
+                comment.MESSAGEId === message.id && <Comment comment={comment} key={comment.id}></Comment>
+            )}
             { message.COMMENTs && message.COMMENTs.map((comment) => <Comment comment={comment} key={comment.id}></Comment>)}
         </article>
     );

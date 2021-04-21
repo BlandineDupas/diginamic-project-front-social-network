@@ -3,7 +3,9 @@ import { sendComment } from "./commentFormAPI";
 
 const initialState = {
     comment: '',
-    error: false
+    error: false,
+    sended: false,
+    sendedComments: []
 };
 
 export const sendCommentAsync = createAsyncThunk(
@@ -23,22 +25,38 @@ export const commentFormSlice = createSlice({
         },
         setErrorTrue: (state) => {
             state.error = true;
+        },
+        clearSendedComments: (state) => {
+            state.sended = false;
+            state.sendedComments = [];
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(sendCommentAsync.fulfilled, () => {
-                return initialState;
+            .addCase(sendCommentAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                return {
+                    comment: '',
+                    error: false,
+                    sended: true,
+                    sendedComments: [
+                        ...state.sendedComments,
+                        action.payload
+                    ]
+                }
             })
     }
 });
 
 export const {
     changeInputValue,
-    setErrorTrue
+    setErrorTrue,
+    clearSendedComments
 } = commentFormSlice.actions;
 
 export const selectComment = (state) => state.commentForm.comment;
 export const selectError = (state) => state.commentForm.error;
+export const selectSended = (state) => state.commentForm.sended;
+export const selectSendedComments = (state) => state.commentForm.sendedComments;
 
 export default commentFormSlice.reducer;
