@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-const Input = ({ inputName, label, inputType, inputData, changeInputValue }) => {
+const Input = ({ inputName, label, inputType, inputData, changeInputValue, messageId }) => {
     const dispatch = useDispatch();
 
     return (
@@ -9,24 +9,23 @@ const Input = ({ inputName, label, inputType, inputData, changeInputValue }) => 
                 <label htmlFor={inputName} className="form-field--label">{label}</label>
             }
             { inputType !== 'textarea' && 
-                <textarea
-                    className="form-field--input"
-                    type={inputType}
-                    name={inputName}
-                    id={inputName}
-                    // value={inputData.value}
-                    // onChange={(evt) => dispatch(changeInputValue({ 'inputName': inputName, 'inputValue': evt.target.value}))}
-                ></textarea>
-            }
-
-            { inputType === 'textarea' && 
-                <textarea
+                <input
                     className="form-field--input"
                     type={inputType}
                     name={inputName}
                     id={inputName}
                     value={inputData}
-                    onChange={(evt) => dispatch(changeInputValue({ 'inputName': inputName, 'inputValue': evt.target.value}))}
+                    onChange={(evt) => dispatch(changeInputValue({'inputValue': evt.target.value, messageId}))}
+                ></input>
+            }
+
+            { inputType === 'textarea' && 
+                <textarea
+                    className="form-field--input"
+                    name={inputName}
+                    id={inputName}
+                    value={inputData}
+                    onChange={(evt) => dispatch(changeInputValue({'inputValue': evt.target.value, messageId}))}
                 ></textarea>
             }
         </div>

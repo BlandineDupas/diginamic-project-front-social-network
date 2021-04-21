@@ -22,46 +22,6 @@ import {
 import Message from "../message/Message";
 import { clearSendedComments } from "../commentForm/commentFormSlice";
 
-// let messages = [
-//     {
-//         content: "je suis un message e suis un message e suis un message e suis un message e suis un message",
-//         author: "Blandine",
-//         date: "25/05/1994",
-//         comments: [
-//             {
-//                 content: "commentaire",
-//                 author: "Blandine",
-//                 date: "25/05/1994"
-//             },  
-//             {
-//                 content: "commentaire",
-//                 author: "Blandine",
-//                 date: "25/05/1994"
-//             },  
-//             {
-//                 content: "commentaire",
-//                 author: "Blandine",
-//                 date: "25/05/1994"
-//             }
-//         ]
-//     },
-//     {
-//         content: "je suis un message je suis un message e suis un message e suis un message e suis un message e suis un message je suis un message e suis un message e suis un message e suis un message e suis un message",
-//         author: "Agnès",
-//         date: "25/05/1904"
-//     },
-//     {
-//         content: "je suis un message",
-//         author: "François",
-//         date: "25/05/2004"
-//     },
-//     {
-//         content: "je suis un message",
-//         author: "Pierre-Jean",
-//         date: "25/05/2000"
-//     }
-// ];
-
 const Home = ({ title, userId }) => {
     const dispatch = useDispatch();
     const messagesList = useSelector(selectMessagesList);

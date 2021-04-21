@@ -6,44 +6,44 @@ import Input from "./Input";
 // Reducer
 import {
     changeInputValue,
-    setErrorTrue,
-    selectComment,
-    selectError,
+    selectComments,
     sendCommentAsync
 } from "./commentFormSlice";
-import { selectToken, selectUser } from "../login/loginSlice";
+import {
+    selectToken,
+    selectUser
+} from "../login/loginSlice";
 
 const CommentForm = ({messageId}) => {
     const dispatch = useDispatch();
-    const comment = useSelector(selectComment);
+    const comments = useSelector(selectComments);
     const user = useSelector(selectUser);
-    const error = useSelector(selectError)
     const token = useSelector(selectToken);
 
     const sendComment = (evt) => {
         evt.preventDefault();
-        comment
-            ? dispatch(sendCommentAsync({
+        comments[messageId] && comments[messageId].trim().length > 0
+            && dispatch(sendCommentAsync({
                 token,
                 commentData : {
-                    content: comment,
+                    content: comments[messageId].trim(),
                     authorId: user.id,
                     messageId
                 }
             }))
-            : dispatch(setErrorTrue())     
     }
 
+    console.log(comments[messageId])
     return (
         <form onSubmit={sendComment}>
             <legend>Commenter...</legend>
             <Input
                 inputName="comment"
                 inputType="textarea"
-                inputData={comment}
+                inputData={comments[messageId] && comments[messageId]}
                 changeInputValue={changeInputValue}
+                messageId={messageId}
             ></Input>
-            { error && <p>Vous ne pouvez pas envoyer un message vide</p>}
             <button type="submit">Envoyer</button>
         </form>
     )
