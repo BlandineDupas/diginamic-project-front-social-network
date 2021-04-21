@@ -1,5 +1,6 @@
 // Components
 import { changeDateFormat } from '../../selectors';
+import CommentForm from '../commentForm/CommentForm';
 import Comment from './Comment';
 
 // Styles
@@ -13,7 +14,8 @@ const Message = ({ message }) => {
                 <p className="message-date">le {changeDateFormat(message.createdAt)}</p>
             </header>
             <p className="message-content">{message.content}</p>
-            { message.comments && message.comments.map((comment) => <Comment comment={comment} key={comment.id}></Comment>)}
+            <CommentForm messageId={message.id}></CommentForm>
+            { message.COMMENTs && message.COMMENTs.map((comment) => <Comment comment={comment} key={comment.id}></Comment>)}
         </article>
     );
 };
