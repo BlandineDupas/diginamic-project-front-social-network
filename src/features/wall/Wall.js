@@ -1,8 +1,9 @@
 import Message from "../message/Message";
 
-const Wall = ({ messages }) => {
+const Wall = ({ messages, children }) => {  
     return (
         <section className="main">
+            {children}
             { messages.map((message) => (
                 <Message message={message} key={message.id}></Message>
             ))}

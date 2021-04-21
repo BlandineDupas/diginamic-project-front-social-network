@@ -3,7 +3,9 @@ import { sendMessage } from "./postFormAPI";
 
 const initialState = {
     message: '',
-    error: false
+    error: false,
+    sended: false,
+    sendedMessages: []
 };
 
 export const sendMessageAsync = createAsyncThunk(
@@ -23,22 +25,38 @@ export const postFormSlice = createSlice({
         },
         setErrorTrue: (state) => {
             state.error = true;
+        },
+        clearSendedMessages: (state) => {
+            state.sended = false;
+            state.sendedMessages = [];
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(sendMessageAsync.fulfilled, (state) => {
-                return initialState;
+            .addCase(sendMessageAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                return {
+                    message: '',
+                    error: false,
+                    sended: true,
+                    sendedMessages: [
+                        ...state.sendedMessages,
+                        action.payload
+                    ]
+                }
             })
     }
 });
 
 export const {
     changeInputValue,
-    setErrorTrue
+    setErrorTrue,
+    clearSendedMessages
 } = postFormSlice.actions;
 
 export const selectMessage = (state) => state.postForm.message;
 export const selectError = (state) => state.postForm.error;
+export const selectSended = (state) => state.postForm.sended;
+export const selectSendedMessages = (state) => state.postForm.sendedMessages;
 
 export default postFormSlice.reducer;

@@ -4,6 +4,15 @@
     max-width: 375px;
     margin: auto;
     
+    .success {
+        text-align: center;
+        background-color: #21c4004d;
+        padding: $gutter;
+        margin-bottom: $gutter * 2;
+        border-radius: 5px;
+        border: 3px solid #126e00;
+    }
+    
     legend {
         font-size: 1.5em;
         text-align: center;
@@ -20,6 +29,7 @@
             text-decoration: underline;
         }
     }
+
     .error {
         text-align: center;
         background-color: #ff00004d;
