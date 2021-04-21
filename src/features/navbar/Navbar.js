@@ -16,10 +16,10 @@ const Navbar = () => {
             {/* if connected */}
             { token && (
                 <ul>
-                    <li><NavLink to="/">Accueil</NavLink></li>
-                    <li><NavLink to="/me">Ma page</NavLink></li>
-                    <li><NavLink to="/friends">Amis</NavLink></li>
-                    <li><NavLink to="/account">Mon compte</NavLink></li>
+                    <li><NavLink exact to="/">Accueil</NavLink></li>
+                    <li><NavLink exact to="/me">Ma page</NavLink></li>
+                    <li><NavLink exact to="/friends">Amis</NavLink></li>
+                    <li><NavLink exact to="/account">Mon compte</NavLink></li>
                 </ul>
             )}
             {/* if not connected */}

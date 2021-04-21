@@ -1,0 +1,50 @@
+@import '../../vars';
+
+.message {
+    padding: $gutter;
+    margin: $gutter;
+    background-color: rgb(168, 168, 240);
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        padding: $gutter;
+        margin-bottom: $gutter;
+    }
+
+    &-author {
+        font-weight: bold;
+    }
+
+    &-date {
+        font-style: italic;
+    }
+
+    &-content {
+        padding: $gutter;
+        background-color: rgb(194, 194, 235);
+    }
+
+    .comment {
+        font-size: 0.9em;
+        
+        header {
+            text-align: right;
+            padding: $gutter;
+        }
+        
+        &-author {
+            font-weight: bold;
+        }
+    
+        &-date {
+            font-style: italic;
+        }
+    
+        &-content {
+            padding: $gutter;
+            background-color: rgb(194, 194, 235);
+        }
+    
+    }
+}

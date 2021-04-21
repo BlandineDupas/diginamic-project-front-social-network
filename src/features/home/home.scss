@@ -1,0 +1,41 @@
+@import '../../vars';
+
+.home {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: $gutter * 2;
+
+    header {
+        grid-column: 1 / 6;
+        text-align: center;
+
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: $gutter;
+        }
+    }
+
+    .aside-left {
+        grid-column: 1;
+
+        h1 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: $gutter 0;
+        }
+    }
+
+    .main {
+        grid-column: 2 / 5;
+    }
+
+    .aside-right {
+        grid-column: 5;
+        
+        h1 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: $gutter 0;
+        }
+    }
+}

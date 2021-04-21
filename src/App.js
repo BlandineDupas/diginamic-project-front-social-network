@@ -10,15 +10,16 @@ import Register from './features/register/Register';
 
 // Components
 import Home from './features/home/Home';
+import Navbar from './features/navbar/Navbar';
 
 // Reducers
-import { selectToken } from './features/login/loginSlice';
+import { selectToken, selectUser } from './features/login/loginSlice';
 import { selectSuccess } from './features/register/registerSlice';
-import Navbar from './features/navbar/Navbar';
 
 function App() {
   const token = useSelector(selectToken);
   const success = useSelector(selectSuccess);
+  const user = useSelector(selectUser);
 
   return (
     <div className="app">
@@ -33,7 +34,8 @@ function App() {
           <Route exact path="/register" component={Register} />
           
           { !token && <Redirect from="/" to="/login" />}
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={() => <Home title="Accueil" userId={user.id}></Home>} />
+          <Route exact path="/me" render={() => <Home title={ user.firstname + ' ' + user.lastname} userId={user.id}></Home>} />
 
         </Switch>
       </BrowserRouter>
