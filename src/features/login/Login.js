@@ -8,6 +8,7 @@ import Input from "./Input"
 import './login.scss';
 
 // Reducer
+import { selectSuccess } from "../register/registerSlice";
 import {
     changeInputValue,
     selectEmail,
@@ -17,11 +18,12 @@ import {
     setError
 } from './loginSlice';
 
-const Login = () => {
+const Login = ({ children }) => {
     const dispatch = useDispatch();
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
     const error = useSelector(selectError);
+    const success = useSelector(selectSuccess);
 
     const userLogin = (evt) => {
         evt.preventDefault();
@@ -37,6 +39,7 @@ const Login = () => {
 
     return (
         <form onSubmit={userLogin} className="login">
+            { success && <p className="success">Le compte a bien été créé, veuillez vous connecter</p> }
             <legend>Se connecter</legend>
             <Link to="/register">Pas encore de compte ? Inscrivez-vous !</Link>
 
