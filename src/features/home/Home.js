@@ -8,6 +8,7 @@ import './home.scss';
 
 // Reducer
 import { selectUser } from "../login/loginSlice";
+import PostForm from "../postForm/PostForm";
 
 let messages = [
     {
@@ -56,6 +57,7 @@ const Home = ({ title }) => {
         <div className="home">
             <header>
                 <h1>{title}</h1>
+                <PostForm></PostForm>
                 <p>Connecté en tant que {user.firstname} {user.lastname}</p>
             </header>
             <aside className="aside-left">
