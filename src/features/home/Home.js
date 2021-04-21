@@ -1,64 +1,77 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import Message from "../message/Message";
+import PostForm from "../postForm/PostForm";
+import Wall from "../wall/Wall";
 
 // Styles
 import './home.scss';
 
 // Reducer
-import { selectUser } from "../login/loginSlice";
-import PostForm from "../postForm/PostForm";
+import { selectToken } from "../login/loginSlice";
+import {
+    fetchMessagesAsync,
+    selectMessagesList
+} from "./homeSlice";
 
-let messages = [
-    {
-        content: "je suis un message e suis un message e suis un message e suis un message e suis un message",
-        author: "Blandine",
-        date: "25/05/1994",
-        comments: [
-            {
-                content: "commentaire",
-                author: "Blandine",
-                date: "25/05/1994"
-            },  
-            {
-                content: "commentaire",
-                author: "Blandine",
-                date: "25/05/1994"
-            },  
-            {
-                content: "commentaire",
-                author: "Blandine",
-                date: "25/05/1994"
-            }
-        ]
-    },
-    {
-        content: "je suis un message je suis un message e suis un message e suis un message e suis un message e suis un message je suis un message e suis un message e suis un message e suis un message e suis un message",
-        author: "Agnès",
-        date: "25/05/1904"
-    },
-    {
-        content: "je suis un message",
-        author: "François",
-        date: "25/05/2004"
-    },
-    {
-        content: "je suis un message",
-        author: "Pierre-Jean",
-        date: "25/05/2000"
-    }
-];
+// let messages = [
+//     {
+//         content: "je suis un message e suis un message e suis un message e suis un message e suis un message",
+//         author: "Blandine",
+//         date: "25/05/1994",
+//         comments: [
+//             {
+//                 content: "commentaire",
+//                 author: "Blandine",
+//                 date: "25/05/1994"
+//             },  
+//             {
+//                 content: "commentaire",
+//                 author: "Blandine",
+//                 date: "25/05/1994"
+//             },  
+//             {
+//                 content: "commentaire",
+//                 author: "Blandine",
+//                 date: "25/05/1994"
+//             }
+//         ]
+//     },
+//     {
+//         content: "je suis un message je suis un message e suis un message e suis un message e suis un message e suis un message je suis un message e suis un message e suis un message e suis un message e suis un message",
+//         author: "Agnès",
+//         date: "25/05/1904"
+//     },
+//     {
+//         content: "je suis un message",
+//         author: "François",
+//         date: "25/05/2004"
+//     },
+//     {
+//         content: "je suis un message",
+//         author: "Pierre-Jean",
+//         date: "25/05/2000"
+//     }
+// ];
 
-const Home = ({ title }) => {
-    const user = useSelector(selectUser);
+const Home = ({ title, userId }) => {
+    const dispatch = useDispatch();
+    const messagesList = useSelector(selectMessagesList);
+    const token = useSelector(selectToken);
+
+    useEffect(() => {
+        dispatch(fetchMessagesAsync({
+            token,
+            userId
+        }))
+    }, [title])
 
     return (
         <div className="home">
             <header>
                 <h1>{title}</h1>
                 <PostForm></PostForm>
-                <p>Connecté en tant que {user.firstname} {user.lastname}</p>
             </header>
             <aside className="aside-left">
                 <h1>Mes amis</h1>
@@ -78,11 +91,8 @@ const Home = ({ title }) => {
                     <li>Prénom Nom</li>
                 </ul>
             </aside>
-            <section className="main">
-                { messages.map((message) => (
-                    <Message message={message} key={message.date}></Message>
-                ))}
-            </section>
+            { title === 'Accueil' && <Wall messages={messagesList}></Wall>}
+            { title !== 'Accueil' && <Wall messages={messagesList}></Wall>}
             <aside className="aside-right">
                 <h1>Messages privés</h1>
             </aside>

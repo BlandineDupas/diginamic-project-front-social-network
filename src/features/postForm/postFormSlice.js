@@ -19,10 +19,17 @@ export const postFormSlice = createSlice({
     reducers: {
         changeInputValue: (state, action) => {
             state[action.payload.inputName] = action.payload.inputValue;
+            action.payload.inputName.length > 0 && (state.error = false);
         },
         setErrorTrue: (state) => {
             state.error = true;
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(sendMessageAsync.fulfilled, (state) => {
+                return initialState;
+            })
     }
 });
 
