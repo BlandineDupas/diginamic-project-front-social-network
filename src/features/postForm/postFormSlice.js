@@ -34,7 +34,6 @@ export const postFormSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(sendMessageAsync.fulfilled, (state, action) => {
-                console.log(action.payload)
                 return {
                     message: '',
                     error: false,
