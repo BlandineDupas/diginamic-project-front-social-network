@@ -14,6 +14,12 @@ import {
     fetchMessagesAsync,
     selectMessagesList
 } from "./homeSlice";
+import {
+    clearSendedMessages,
+    selectSended,
+    selectSendedMessages
+} from "../postForm/postFormSlice";
+import Message from "../message/Message";
 
 // let messages = [
 //     {
@@ -59,14 +65,17 @@ const Home = ({ title, userId }) => {
     const dispatch = useDispatch();
     const messagesList = useSelector(selectMessagesList);
     const token = useSelector(selectToken);
+    const sended = useSelector(selectSended);
+    const sendedMessages = useSelector(selectSendedMessages);
 
     useEffect(() => {
         dispatch(fetchMessagesAsync({
             token,
             userId
-        }))
+        }));
+        dispatch(clearSendedMessages())
     }, [title])
-
+    
     return (
         <div className="home">
             <header>
@@ -92,7 +101,13 @@ const Home = ({ title, userId }) => {
                 </ul>
             </aside>
             { title === 'Accueil' && <Wall messages={messagesList}></Wall>}
-            { title !== 'Accueil' && <Wall messages={messagesList}></Wall>}
+            { title !== 'Accueil' && 
+                <Wall messages={messagesList}>
+                    {sended && sendedMessages.map((message) => (
+                        <Message message={message} key={message.id}></Message>
+                    ))}
+                </Wall>
+            }
             <aside className="aside-right">
                 <h1>Messages privés</h1>
             </aside>
