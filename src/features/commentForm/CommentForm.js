@@ -33,7 +33,6 @@ const CommentForm = ({messageId}) => {
             }))
     }
 
-    console.log(comments[messageId])
     return (
         <form onSubmit={sendComment}>
             <legend>Commenter...</legend>

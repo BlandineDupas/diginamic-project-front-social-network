@@ -10,5 +10,5 @@ export const logUser = (user) => {
         }
     )
     .then((response) => response.json())
-    .then((response) => response.token ? response : console.log(response.error))
+    // .then((response) => response.token ? response : console.log(response.error))
 }

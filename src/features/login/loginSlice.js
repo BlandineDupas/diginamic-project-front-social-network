@@ -37,8 +37,11 @@ export const loginSlice = createSlice({
     extraReducers: (builder) => {
         builder
           .addCase(userLoginAsync.fulfilled, (state, action) => {
-            state.token = action.payload.token;
-            state.user = action.payload.user;
+            if (action.payload.error) state.error = action.payload.error;
+            else {
+                state.token = action.payload.token;
+                state.user = action.payload.user;
+            }
           });
     },
 });
