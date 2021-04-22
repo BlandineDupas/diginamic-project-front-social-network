@@ -31,7 +31,7 @@ function App() {
         <Navbar></Navbar>
             <Switch>
                 {/* If connected, don't show login page */}
-                { token && <Redirect from="/login" to="/" /> }
+                { token && <Redirect from="/login" to="/friends" /> }
                 <Route exact path="/login" component={Login} />
                 
                 {/* If just registered, redirect to login page */}

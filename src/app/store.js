@@ -4,6 +4,7 @@ import loginReducer from '../features/login/loginSlice';
 import postFormReducer from '../features/postForm/postFormSlice';
 import homeReducer from '../features/home/homeSlice';
 import commentFormReducer from '../features/commentForm/commentFormSlice';
+import friendsPageReducer from '../features/friendsPage/friendsPageSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     login: loginReducer,
     postForm: postFormReducer,
     home: homeReducer,
-    commentForm: commentFormReducer
+    commentForm: commentFormReducer,
+    friendsPage: friendsPageReducer
   },
 });
