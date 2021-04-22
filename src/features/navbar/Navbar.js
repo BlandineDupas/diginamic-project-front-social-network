@@ -5,10 +5,12 @@ import { Link, NavLink } from "react-router-dom"
 import './navbar.scss';
 
 // Reducers
-import { selectToken } from "../login/loginSlice";
+import { selectToken, selectUser } from "../login/loginSlice";
+import { slugifyName } from "../../selectors";
 
 const Navbar = () => {
     const token = useSelector(selectToken);
+    const user = useSelector(selectUser);
 
     return (
         <nav className="navbar">
@@ -17,7 +19,7 @@ const Navbar = () => {
             { token && (
                 <ul>
                     <li><NavLink exact to="/">Accueil</NavLink></li>
-                    <li><NavLink exact to="/me">Ma page</NavLink></li>
+                    <li><NavLink exact to={'/' + slugifyName(user.firstname, user.lastname, user.id)}>Ma page</NavLink></li>
                     <li><NavLink exact to="/friends">Amis</NavLink></li>
                     <li><NavLink exact to="/account">Mon compte</NavLink></li>
                 </ul>
