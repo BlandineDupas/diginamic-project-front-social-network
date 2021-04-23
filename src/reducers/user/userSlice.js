@@ -51,15 +51,6 @@ export const userSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    // TODO supprimer clearform ?
-    clearForm: (state) => {
-      return {
-        ...state,
-        email: '',
-        password: '',
-        error: false            
-      }
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -89,10 +80,6 @@ export const userSlice = createSlice({
       })
   },
 });
-
-export const {
-  clearForm
-} = userSlice.actions;
 
 export const selectToken = (state) => state.user.token;
 export const selectUser = (state) => state.user.user;

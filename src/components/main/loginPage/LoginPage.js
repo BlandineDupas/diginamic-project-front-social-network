@@ -35,10 +35,10 @@ const LoginPage = () => {
   }
 
   return (
-    <Page title="Se connecter">
+    <Page title="Se connecter" extraClass="login">
       { registerResult.success && <p className="success">Le compte a bien été créé, veuillez vous connecter</p> }
       <Link to="/register">Pas encore de compte ? Inscrivez-vous !</Link>
-      <form onSubmit={userLogin} className="login">
+      <form onSubmit={userLogin}>
         <Input
           inputName="email"
           inputType="email"

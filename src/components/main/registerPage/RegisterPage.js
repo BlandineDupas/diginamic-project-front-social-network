@@ -63,8 +63,8 @@ const RegisterPage = () => {
   const checkPasswordCheck = () => (passwordCheck !== password) ? setPasswordCheckError('Les mots de passe doivent être identiques') : setPasswordCheckError('');
 
   return (
-    <Page title="Inscription">
-      <form onSubmit={checkForm} className="register">
+    <Page title="Inscription" extraClass="register">
+      <form onSubmit={checkForm}>
         <Link to="/login">Déjà inscrit ? Connectez-vous !</Link>
         
         <Input
