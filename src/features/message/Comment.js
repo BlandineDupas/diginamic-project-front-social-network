@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { changeDateFormat } from "../../selectors";
 
 // Reducer
-import { selectUser } from "../login/loginSlice";
+import { selectUser } from "../../reducers/user/userSlice";
 
 const Comment = ({ comment }) => {
     const user = useSelector(selectUser);

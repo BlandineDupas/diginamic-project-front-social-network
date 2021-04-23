@@ -1,5 +1,5 @@
 // Components
-import Page from '../page/Page';
+import Page from 'components/parts/page/Page';
 
 const AccountPage = () => {
     return (

@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import registerReducer from '../features/register/registerSlice';
-import loginReducer from '../features/login/loginSlice';
+import registerReducer from '../components/main/register/registerSlice';
+import loginReducer from '../reducers/user/userSlice';
 import postFormReducer from '../features/postForm/postFormSlice';
 import homeReducer from '../features/home/homeSlice';
 import commentFormReducer from '../features/commentForm/commentFormSlice';
-import friendsPageReducer from '../features/friendsPage/friendsPageSlice';
+import friendsPageReducer from '../components/main/friendsPage/friendsPageSlice';
 
 export const store = configureStore({
   reducer: {

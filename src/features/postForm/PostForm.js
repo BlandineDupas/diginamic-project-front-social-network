@@ -11,7 +11,7 @@ import {
     selectError,
     sendMessageAsync
 } from "./postFormSlice";
-import { selectToken, selectUser } from "../login/loginSlice";
+import { selectToken, selectUser } from "../../reducers/user/userSlice";
 
 const PostForm = () => {
     const dispatch = useDispatch();

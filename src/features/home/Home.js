@@ -9,7 +9,7 @@ import Wall from "../wall/Wall";
 import './home.scss';
 
 // Reducer
-import { selectToken } from "../login/loginSlice";
+import { selectToken } from "../../reducers/user/userSlice";
 import {
     fetchMessagesAsync,
     selectMessagesList

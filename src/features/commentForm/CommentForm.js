@@ -12,7 +12,7 @@ import {
 import {
     selectToken,
     selectUser
-} from "../login/loginSlice";
+} from "../../reducers/user/userSlice";
 
 const CommentForm = ({messageId}) => {
     const dispatch = useDispatch();

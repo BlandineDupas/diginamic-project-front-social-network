@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 // Components
-import UsersList from '../usersList/UsersList';
-import Page from '../page/Page';
+import UsersList from 'components/parts/usersList/UsersList';
+import Page from 'components/parts/page/Page';
 
 // Styles
 import './friendsPage.scss';
@@ -14,7 +14,7 @@ import {
     answerInviteAsync,
     deleteInviteAsync,
     inviteUserAsync,
-} from '../login/loginSlice';
+} from '../../../reducers/user/userSlice';
 import {
     changeInputValue,
     searchUsersAsync,

@@ -8,7 +8,7 @@ import CommentForm from '../commentForm/CommentForm';
 import Comment from './Comment';
 
 // Reducer
-import { selectUser } from '../login/loginSlice';
+import { selectUser } from '../../reducers/user/userSlice';
 
 // Styles
 import './message.scss';

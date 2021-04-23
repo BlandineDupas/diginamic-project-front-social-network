@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom"
+import { useSelector } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
 
 // Styles
 import './navbar.scss';
 
 // Reducers
-import { selectToken, selectUser } from "../login/loginSlice";
-import { slugifyName } from "../../selectors";
+import { selectToken, selectUser } from 'reducers/user/userSlice';
+import { slugifyName } from 'selectors';
 
 const Navbar = () => {
     const token = useSelector(selectToken);

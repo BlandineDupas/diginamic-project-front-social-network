@@ -5,20 +5,20 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 // Styles
 import './app.scss';
 
-import Login from './features/login/Login';
-import Register from './features/register/Register';
-
 // Components
-import Home from './features/home/Home';
-import Navbar from './features/navbar/Navbar';
+import Navbar from 'components/parts/navbar/Navbar';
+
+import HomePage from 'components/main/homePage/HomePage';
+import Login from 'components/main/loginPage/LoginPage';
+import Register from 'components/main/register/Register';
+import UserPage from 'components/main/userPage/UserPage';
+import FriendsPage from 'components/main/friendsPage/FriendsPage';
+import AccountPage from 'components/main/accountPage/AccountPage';
 
 // Reducers
-import { selectToken, selectUser } from './features/login/loginSlice';
-import { selectSuccess } from './features/register/registerSlice';
-import { getIdFromSlug } from './selectors';
-import UserPage from './features/userPage/UserPage';
-import FriendsPage from './features/friendsPage/FriendsPage';
-import AccountPage from './features/accountPage/AccountPage';
+import { selectToken, selectUser } from '../reducers/user/userSlice';
+import { selectSuccess } from './main/register/registerSlice';
+import { getIdFromSlug } from '../selectors';
 
 function App() {
     const token = useSelector(selectToken);
@@ -31,7 +31,7 @@ function App() {
         <Navbar></Navbar>
             <Switch>
                 {/* If connected, don't show login page */}
-                { token && <Redirect from="/login" to="/friends" /> }
+                { token && <Redirect from="/login" to="/" /> }
                 <Route exact path="/login" component={Login} />
                 
                 {/* If just registered, redirect to login page */}
@@ -44,7 +44,7 @@ function App() {
                 { !token && <Redirect from="/" to="/login" />}
 
                 {/* All other routes */}
-                <Route exact path="/" render={() => <Home title="Accueil" userId={user.id}></Home>} />
+                <Route exact path="/" render={() => <HomePage title="Accueil" userId={user.id}></HomePage>} />
                 <Route exact path="/friends" component={FriendsPage} />
                 <Route exact path="/account" component={AccountPage} />
 
