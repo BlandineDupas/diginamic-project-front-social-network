@@ -21,28 +21,6 @@ export const searchUsersAsync = createAsyncThunk(
     }
 )
 
-export const answerInviteAsync = createAsyncThunk(
-    'invite/answer',
-    async (request) => {
-        return await answerInvite(request);
-    }
-)
-
-export const deleteInviteAsync = createAsyncThunk(
-    'invite/delete',
-    async (request) => {
-        return await deleteInvite(request);
-    }
-)
-
-export const inviteUserAsync = createAsyncThunk(
-    'user/invite',
-    async (request) => {
-        return await inviteUser(request);
-    }
-)
-
-
 export const friendsPageSlice = createSlice({
     name: 'friendsPage',
     initialState,
@@ -63,16 +41,6 @@ export const friendsPageSlice = createSlice({
                     state.searchResult = action.payload;
                 }
             })
-            .addCase(answerInviteAsync.fulfilled, (state, action) => {
-                console.log(action.payload)
-            })
-            .addCase(deleteInviteAsync.fulfilled, (state, action) => {
-                console.log(action.payload)
-            })
-            .addCase(inviteUserAsync.fulfilled, (state, action) => {
-                console.log(action.payload)
-            })
-
     }
 });
 

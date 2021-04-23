@@ -10,13 +10,13 @@ import './friendsPage.scss';
 // Reducers
 import {
     selectToken,
-    selectUser
-} from '../login/loginSlice';
-import {
+    selectUser,
     answerInviteAsync,
-    changeInputValue,
     deleteInviteAsync,
     inviteUserAsync,
+} from '../login/loginSlice';
+import {
+    changeInputValue,
     searchUsersAsync,
     selectSearch,
     selectSearchResult,

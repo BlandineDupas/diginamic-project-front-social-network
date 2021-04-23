@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { logUser } from "./loginAPI";
+import { answerInvite, deleteInvite, inviteUser, logUser } from "./loginAPI";
 
 const initialState = {
     email: '',
@@ -14,6 +14,27 @@ export const userLoginAsync = createAsyncThunk(
     'user/login',
     async (user) => await logUser(user)
 );
+
+export const answerInviteAsync = createAsyncThunk(
+    'invite/answer',
+    async (request) => {
+        return await answerInvite(request);
+    }
+)
+
+export const deleteInviteAsync = createAsyncThunk(
+    'invite/delete',
+    async (request) => {
+        return await deleteInvite(request);
+    }
+)
+
+export const inviteUserAsync = createAsyncThunk(
+    'user/invite',
+    async (request) => {
+        return await inviteUser(request);
+    }
+)
 
 export const loginSlice = createSlice({
     name: 'login',
@@ -36,13 +57,25 @@ export const loginSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-          .addCase(userLoginAsync.fulfilled, (state, action) => {
-            if (action.payload.error) state.error = action.payload.error;
-            else {
-                state.token = action.payload.token;
-                state.user = action.payload.user;
-            }
-          });
+            .addCase(userLoginAsync.fulfilled, (state, action) => {
+                if (action.payload.error) state.error = action.payload.error;
+                else {
+                    state.token = action.payload.token;
+                    state.user = action.payload.user;
+                }
+            })
+            .addCase(answerInviteAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.user = action.payload;
+            })
+            .addCase(deleteInviteAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.user = action.payload;
+            })
+            .addCase(inviteUserAsync.fulfilled, (state, action) => {
+                state.user = action.payload;
+                console.log(action.payload)
+            })
     },
 });
 
