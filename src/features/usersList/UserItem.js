@@ -7,7 +7,12 @@ const UserItem = ({ user, buttons }) => {
     return (
         <div className="userItem">
             <p className="userItem__identity">{user.firstname} {user.lastname}</p>
-            { buttons.map((button, key) => <button className={'userItem__button ' + button.color} key={key}>{button.label}</button>)}
+            { buttons.map((button, key) => 
+                <button
+                    className={'userItem__button ' + button.color}
+                    key={key}
+                    onClick={() => button.action(user.id, button.actionParam)}
+                >{button.label}</button>)}
         </div>
     );
 };

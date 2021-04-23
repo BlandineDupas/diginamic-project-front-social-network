@@ -13,29 +13,15 @@ import {
     selectUser
 } from '../login/loginSlice';
 import {
+    answerInviteAsync,
     changeInputValue,
+    deleteInviteAsync,
+    inviteUserAsync,
     searchUsersAsync,
     selectSearch,
-    selectSearchResult
+    selectSearchResult,
+    selectSearchResultMessage
 } from './friendsPageSlice';
-
-const users = [
-    {
-        firstname: 'Blandine',
-        lastname: 'Roustan',
-        id: '1'
-    },
-    {
-        firstname: 'Blandine',
-        lastname: 'Roustan',
-        id: '2'
-    },
-    {
-        firstname: 'Blandine',
-        lastname: 'Roustan',
-        id: '3'
-    }
-];
 
 const FriendsPage = () => {
     const dispatch = useDispatch();
@@ -43,15 +29,43 @@ const FriendsPage = () => {
     const token = useSelector(selectToken);
     const search = useSelector(selectSearch);
     const searchResult = useSelector(selectSearchResult);
-
+    const searchResultMessage = useSelector(selectSearchResultMessage);
+    
     const searchUsers = (evt) => {
         evt.preventDefault();
-        console.log('search users')
         search && dispatch(searchUsersAsync({
             token,
             search
         }));
     };
+
+    const answerInvite = (proposerId, status) => {
+        console.log('answerInvite')
+        dispatch(answerInviteAsync({
+            token,
+            answer: {
+                status,
+                proposerId
+            },
+            userId: user.id
+        }));
+    }
+
+    const deleteInvite = (receiverId) => {
+        dispatch(deleteInviteAsync({
+            token,
+            receiverId,
+            userId: user.id
+        }));
+    }
+
+    const inviteUser = (receiverId) => {
+        dispatch(inviteUserAsync({
+            token,
+            receiverId,
+            userId: user.id
+        }));
+    }
 
     return (
         <Page title="Gérer mes amis" extraClass="friendsPage">
@@ -60,17 +74,23 @@ const FriendsPage = () => {
                 <UsersList
                     title="Invitations reçues"
                     type="received_invites"
-                    users={user.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}                        
+                    action={answerInvite}
+                    users={user.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
+                    emptyMessage="Vous n'avez pas reçu d'invitation"                      
                 ></UsersList>
                 <UsersList
                     title="Invitations refusées"
                     type="archived_invites"
+                    action={answerInvite}
                     users={user.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'denied')}
+                    emptyMessage="Vous n'avez aucune invitation refusée"                      
                 ></UsersList>
                 <UsersList
                     title="Invitations en attente"
                     type="proposed_invites"
+                    action={deleteInvite}
                     users={user.proposed_invites.filter((invite) => invite.PROPOSED_INVITE.status === 'waiting')}
+                    emptyMessage="Vous n'avez pas proposé d'invitation"                      
                 ></UsersList>
             </section>
             <section className="friendsPage__addFriend">
@@ -79,11 +99,20 @@ const FriendsPage = () => {
                     <input type="text" placeholder="Rechercher" value={search} onChange={(evt) => dispatch(changeInputValue(evt.target.value))}/>
                     <button type="submit">&gt;</button>
                 </form>
-                <UsersList users={searchResult} type="invitable_user"></UsersList>
+                <UsersList
+                    type="invitable_user"
+                    action={inviteUser}
+                    users={searchResult}
+                    emptyMessage={searchResultMessage}                      
+                ></UsersList>
             </section>
             <section className="friendsPage__myFriends">
                 <h2 className="friendsPage__subtitle">Mes amis</h2>
-                <UsersList users={user.friends} type="user"></UsersList>
+                <UsersList
+                    type="user"
+                    users={user.friends}
+                    emptyMessage="Vous n'avez pas encore d'ami"                      
+                ></UsersList>
             </section>
         </Page>
     );
