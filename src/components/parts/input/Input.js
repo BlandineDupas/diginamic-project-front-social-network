@@ -1,5 +1,12 @@
-const Input = ({ inputName, label, inputType, inputData, changeInputValue }) => {
-
+const Input = ({
+  inputName,
+  label,
+  inputType,
+  inputValue,
+  changeInputValue,
+  checkInput,
+  error
+}) => {  
   return (
     <div className="form-field">
       <label htmlFor={inputName} className="form-field--label">{label}</label>
@@ -8,9 +15,11 @@ const Input = ({ inputName, label, inputType, inputData, changeInputValue }) => 
         type={inputType}
         name={inputName}
         id={inputName}
-        value={inputData}
+        value={inputValue}
         onChange={(evt) => changeInputValue(evt.target.value)}
+        onBlur={checkInput}
       ></input>
+      {error && <p className="form-field--error error">{error}</p>}
     </div>
   )
 };

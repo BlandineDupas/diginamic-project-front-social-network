@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import {
+  addUser,
   answerInvite,
   deleteInvite,
   inviteUser,
@@ -10,7 +11,15 @@ import {
 const initialState = {
   token: false,
   user: {},
+  registerResult: ''
 };
+
+export const addUserAsync = createAsyncThunk(
+  "user/add",
+  async (user) => {
+    return await addUser(user);
+  }
+);
 
 export const userLoginAsync = createAsyncThunk(
   'user/login',
@@ -38,7 +47,7 @@ export const inviteUserAsync = createAsyncThunk(
   }
 )
 
-export const loginSlice = createSlice({
+export const userSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
@@ -54,6 +63,11 @@ export const loginSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(addUserAsync.fulfilled, (state, action) => {
+        action.payload.error
+          ? (state.registerResult = {success: false, error: action.payload.error})
+          : (state.registerResult = {success: true, error: ''});
+      })
       .addCase(userLoginAsync.fulfilled, (state, action) => {
         if (action.payload.error) state.error = action.payload.error;
         else {
@@ -78,9 +92,10 @@ export const loginSlice = createSlice({
 
 export const {
   clearForm
-} = loginSlice.actions;
+} = userSlice.actions;
 
-export const selectToken = (state) => state.login.token;
-export const selectUser = (state) => state.login.user;
+export const selectToken = (state) => state.user.token;
+export const selectUser = (state) => state.user.user;
+export const selectRegisterResult = (state) => state.user.registerResult;
 
-export default loginSlice.reducer;
+export default userSlice.reducer;
