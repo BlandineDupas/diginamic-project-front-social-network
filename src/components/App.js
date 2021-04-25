@@ -19,7 +19,6 @@ import AccountPage from 'components/main/accountPage/AccountPage';
 import {
   selectRegisterResult,
   selectToken,
-  selectCurrentUser
 } from 'reducers/user/userSlice';
 
 // Selectors
@@ -28,7 +27,6 @@ import { getIdFromSlug } from '../selectors';
 function App() {
   const token = useSelector(selectToken);
   const registerResult = useSelector(selectRegisterResult);
-  const currentUser = useSelector(selectCurrentUser);
 
   return (
     <div className="app">

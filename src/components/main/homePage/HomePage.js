@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -72,10 +71,6 @@ const HomePage = () => {
         </div>
     </Page>
   );
-};
-
-HomePage.propTypes = {
-    userId: PropTypes.number.isRequired,
 };
 
 export default HomePage;

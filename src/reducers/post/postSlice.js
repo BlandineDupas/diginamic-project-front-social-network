@@ -2,11 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import {
   fetchPosts,
+  sendComment,
   sendPost
 } from './postAPI';
 
 const initialState = {
-  postsList: []
+  postsList: [],
+  newComments: [],
 };
 
 export const fetchPostsAsync = createAsyncThunk(
@@ -14,14 +16,21 @@ export const fetchPostsAsync = createAsyncThunk(
   async (request) => {
     return await fetchPosts(request);
   }
-)
+);
 
 export const sendPostAsync = createAsyncThunk(
   'post/send',
   async (request) => {
     return await sendPost(request);
   }
-)
+);
+
+export const sendCommentAsync = createAsyncThunk(
+  "comment/send",
+  async (request) => {
+    return await sendComment(request);
+  }
+);
 
 const postSlice = createSlice({
   name: 'post',
@@ -38,9 +47,17 @@ const postSlice = createSlice({
           ...state.postsList,
         ]
       })
+      .addCase(sendCommentAsync.fulfilled, (state, action) => {
+        state.newComments = [
+          ...state.newComments,
+          action.payload
+        ]
+      })
+
   }
 });
 
 export const selectPostsList = (state) => state.post.postsList;
+export const selectNewComments = (state) => state.post.newComments;
 
 export default postSlice.reducer;

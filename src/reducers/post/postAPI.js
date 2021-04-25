@@ -30,3 +30,18 @@ export const sendPost = (request) => {
 )
 .then((response) => response.json(response))
 }
+
+export const sendComment = (request) => {
+  return fetch(
+      api + '/api/comment',
+      {
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json',
+              'Authorization': 'Bearer ' + request.token
+          },
+          body: JSON.stringify(request.commentData)
+      }
+  )
+  .then((response) => response.json())
+}
