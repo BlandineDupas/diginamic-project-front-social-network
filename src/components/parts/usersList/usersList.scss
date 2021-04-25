@@ -1,0 +1,8 @@
+@import '/src/styles/vars';
+
+.usersList {
+    &__title {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+}

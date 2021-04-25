@@ -1,0 +1,14 @@
+@import '/src/styles/vars';
+
+.friendsPage {
+    &__subtitle {
+        grid-column: 1 / 4;
+        font-size: 1.3em;
+        margin-bottom: $gutter;
+    }
+
+    &__invitations {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);        
+    }
+}
