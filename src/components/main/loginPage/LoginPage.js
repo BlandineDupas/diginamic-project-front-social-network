@@ -11,6 +11,7 @@ import './login.scss';
 
 // Reducer
 import {
+  selectLoginError,
   selectRegisterResult,
   userLoginAsync,
 } from 'reducers/user/userSlice';
@@ -18,19 +19,21 @@ import {
 const LoginPage = () => {
   const dispatch = useDispatch();
   const registerResult = useSelector(selectRegisterResult);
+  const loginError = useSelector(selectLoginError);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
 
   const userLogin = (evt) => {
     evt.preventDefault();
+    setError('');
     if (email && password) {
       dispatch(userLoginAsync({
         email,
         password
       }));
     } else {
-      setError("Les deux champs doivent être remplis");
+      setError('Les deux champs doivent être remplis');
     }
   }
 
@@ -53,8 +56,10 @@ const LoginPage = () => {
           inputValue={password}
           changeInputValue={setPassword}
         ></Input>
-        {(typeof error === 'string') && <p className="error">{error}</p>}
-        
+        {/* { error || loginError && <p className="error">{error}</p> } */}
+        { error && <p className="error">{error}</p>}
+        { (!error && loginError) && <p className="error">{loginError}</p> }
+
         <button type="submit">Connexion</button>
       </form>
     </Page>

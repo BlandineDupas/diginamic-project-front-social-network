@@ -11,7 +11,8 @@ import {
 const initialState = {
   token: false,
   currentUser: {},
-  registerResult: ''
+  registerResult: '',
+  loginError: ''
 };
 
 export const addUserAsync = createAsyncThunk(
@@ -60,10 +61,11 @@ export const userSlice = createSlice({
           : (state.registerResult = {success: true, error: ''});
       })
       .addCase(userLoginAsync.fulfilled, (state, action) => {
-        if (action.payload.error) state.error = action.payload.error;
+        if (action.payload.error) state.loginError = action.payload.error;
         else {
           state.token = action.payload.token;
           state.currentUser = action.payload.user;
+          state.loginError = '';
         }
       })
       .addCase(answerInviteAsync.fulfilled, (state, action) => {
@@ -81,5 +83,6 @@ export const userSlice = createSlice({
 export const selectToken = (state) => state.user.token;
 export const selectCurrentUser = (state) => state.user.currentUser;
 export const selectRegisterResult = (state) => state.user.registerResult;
+export const selectLoginError = (state) => state.user.loginError;
 
 export default userSlice.reducer;
