@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   token: false,
-  user: {},
+  currentUser: {},
   registerResult: ''
 };
 
@@ -79,7 +79,7 @@ export const userSlice = createSlice({
 });
 
 export const selectToken = (state) => state.user.token;
-export const selectUser = (state) => state.user.user;
+export const selectCurrentUser = (state) => state.user.currentUser;
 export const selectRegisterResult = (state) => state.user.registerResult;
 
 export default userSlice.reducer;

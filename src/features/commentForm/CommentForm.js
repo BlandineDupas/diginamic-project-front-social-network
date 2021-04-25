@@ -11,13 +11,13 @@ import {
 } from "./commentFormSlice";
 import {
     selectToken,
-    selectUser
+    selectCurrentUser
 } from "../../reducers/user/userSlice";
 
 const CommentForm = ({messageId}) => {
     const dispatch = useDispatch();
     const comments = useSelector(selectComments);
-    const user = useSelector(selectUser);
+    const currentUser = useSelector(selectCurrentUser);
     const token = useSelector(selectToken);
 
     const sendComment = (evt) => {
@@ -27,7 +27,7 @@ const CommentForm = ({messageId}) => {
                 token,
                 commentData : {
                     content: comments[messageId].trim(),
-                    authorId: user.id,
+                    authorId: currentUser.id,
                     messageId
                 }
             }))

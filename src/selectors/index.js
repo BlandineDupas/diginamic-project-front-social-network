@@ -12,5 +12,5 @@ export const slugifyName = (firstname, lastname, id) => {
 
 export const getIdFromSlug = (slug) => {
     const splittedSlug = slug.split('_');
-    return splittedSlug[splittedSlug.length - 1]
+    return Number(splittedSlug[splittedSlug.length - 1]);
 }

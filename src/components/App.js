@@ -19,7 +19,7 @@ import AccountPage from 'components/main/accountPage/AccountPage';
 import {
   selectRegisterResult,
   selectToken,
-  selectUser
+  selectCurrentUser
 } from 'reducers/user/userSlice';
 
 // Selectors
@@ -28,7 +28,7 @@ import { getIdFromSlug } from '../selectors';
 function App() {
   const token = useSelector(selectToken);
   const registerResult = useSelector(selectRegisterResult);
-  const user = useSelector(selectUser);
+  const currentUser = useSelector(selectCurrentUser);
 
   return (
     <div className="app">
@@ -49,7 +49,7 @@ function App() {
             { !token && <Redirect from="/" to="/login" />}
 
             {/* All other routes */}
-            <Route exact path="/" render={() => <HomePage title="Accueil" userId={user.id}></HomePage>} />
+            <Route exact path="/" component={HomePage} />
             <Route exact path="/friends" component={FriendsPage} />
             <Route exact path="/account" component={AccountPage} />
 

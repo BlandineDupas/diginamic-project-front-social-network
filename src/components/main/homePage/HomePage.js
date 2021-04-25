@@ -12,7 +12,7 @@ import UsersList from 'components/parts/usersList/UsersList';
 import {
   answerInviteAsync,
   selectToken,
-  selectUser
+  selectCurrentUser
 } from 'reducers/user/userSlice';
 import {
   fetchPostsAsync,
@@ -22,7 +22,7 @@ import {
 const HomePage = () => {
   const dispatch = useDispatch();
   const postsList = useSelector(selectPostsList);
-  const user = useSelector(selectUser);
+  const currentUser = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
 
   const answerInvite = (proposerId, status) => {
@@ -32,13 +32,13 @@ const HomePage = () => {
         status,
         proposerId,
       },
-      userId: user.id
+      userId: currentUser.id
     }));
   }
 
   useEffect(() => {
     const friendsIdArray = [];
-    user.friends.forEach((friend) => friendsIdArray.push(friend.id));
+    currentUser.friends.forEach((friend) => friendsIdArray.push(friend.id));
     dispatch(fetchPostsAsync({
       token,
       authorArray: friendsIdArray
@@ -54,13 +54,13 @@ const HomePage = () => {
               title="Invitations reçues"
               type="received_invites"
               action={answerInvite}
-              users={user.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
+              users={currentUser.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
               emptyMessage="Vous n'avez pas reçu d'invitation"                      
             ></UsersList>
             <UsersList
               title="Mes amis"
               type="user"
-              users={user.friends}
+              users={currentUser.friends}
               emptyMessage="Vous n'avez pas encore d'ami"                      
             ></UsersList>
           </aside>

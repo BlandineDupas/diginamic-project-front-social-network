@@ -12,7 +12,7 @@ import './friendsPage.scss';
 // Reducers
 import {
   selectToken,
-  selectUser,
+  selectCurrentUser,
   answerInviteAsync,
   deleteInviteAsync,
   inviteUserAsync,
@@ -20,7 +20,7 @@ import {
 
 const FriendsPage = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const currentUser = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
 
   const [search, setSearch] = useState('');
@@ -61,7 +61,7 @@ const FriendsPage = () => {
         status,
         proposerId
       },
-      userId: user.id
+      userId: currentUser.id
     }));
   }
 
@@ -69,7 +69,7 @@ const FriendsPage = () => {
     dispatch(deleteInviteAsync({
       token,
       receiverId,
-      userId: user.id
+      userId: currentUser.id
     }));
   }
 
@@ -77,7 +77,7 @@ const FriendsPage = () => {
     dispatch(inviteUserAsync({
       token,
       receiverId,
-      userId: user.id
+      userId: currentUser.id
     }));
   }
 
@@ -89,21 +89,21 @@ const FriendsPage = () => {
           title="Invitations reçues"
           type="received_invites"
           action={answerInvite}
-          users={user.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
+          users={currentUser.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
           emptyMessage="Vous n'avez pas reçu d'invitation"                      
         ></UsersList>
         <UsersList
           title="Invitations refusées"
           type="archived_invites"
           action={answerInvite}
-          users={user.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'denied')}
+          users={currentUser.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'denied')}
           emptyMessage="Vous n'avez aucune invitation refusée"                      
         ></UsersList>
         <UsersList
           title="Invitations en attente"
           type="proposed_invites"
           action={deleteInvite}
-          users={user.proposed_invites.filter((invite) => invite.PROPOSED_INVITE.status === 'waiting')}
+          users={currentUser.proposed_invites.filter((invite) => invite.PROPOSED_INVITE.status === 'waiting')}
           emptyMessage="Vous n'avez pas proposé d'invitation"                      
         ></UsersList>
       </section>
@@ -126,7 +126,7 @@ const FriendsPage = () => {
         <h2 className="friendsPage__subtitle">Mes amis</h2>
         <UsersList
           type="user"
-          users={user.friends}
+          users={currentUser.friends}
           emptyMessage="Vous n'avez pas encore d'ami"                      
         ></UsersList>
       </section>

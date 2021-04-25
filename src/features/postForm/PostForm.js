@@ -11,12 +11,12 @@ import {
     selectError,
     sendMessageAsync
 } from "./postFormSlice";
-import { selectToken, selectUser } from "../../reducers/user/userSlice";
+import { selectToken, selectCurrentUser } from "../../reducers/user/userSlice";
 
 const PostForm = () => {
     const dispatch = useDispatch();
     const message = useSelector(selectMessage);
-    const user = useSelector(selectUser);
+    const currentUser = useSelector(selectCurrentUser);
     const error = useSelector(selectError)
     const token = useSelector(selectToken);
 
@@ -27,7 +27,7 @@ const PostForm = () => {
                 token,
                 messageData : {
                     content: message,
-                    authorId: user.id
+                    authorId: currentUser.id
                 }
             }))
             : dispatch(setErrorTrue())     

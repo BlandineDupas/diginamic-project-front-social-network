@@ -8,21 +8,21 @@ import CommentForm from 'features/commentForm/CommentForm';
 import Comment from './Comment';
 
 // Reducer
-import { selectUser } from 'reducers/user/userSlice';
+import { selectCurrentUser } from 'reducers/user/userSlice';
 
 // Styles
 import './post.scss';
 import { selectSended, selectSendedComments } from 'features/commentForm/commentFormSlice';
 
 const Post = ({ post }) => {
-  const user = useSelector(selectUser);
+  const currentUser = useSelector(selectCurrentUser);
   const sended = useSelector(selectSended);
   const sendedComments = useSelector(selectSendedComments);
 
   return (
     <article className="post">
       <header className="post-header">
-        <p className="post-author">{post.USER ? post.USER.firstname : user.firstname} {post.USER ? post.USER.lastname : user.lastname}</p>
+        <p className="post-author">{post.USER ? post.USER.firstname : currentUser.firstname} {post.USER ? post.USER.lastname : currentUser.lastname}</p>
         <p className="post-date">le {changeDateFormat(post.createdAt)}</p>
       </header>
       <p className="post-content">{post.content}</p>
