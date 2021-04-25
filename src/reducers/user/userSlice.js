@@ -67,16 +67,13 @@ export const userSlice = createSlice({
         }
       })
       .addCase(answerInviteAsync.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.user = action.payload;
       })
       .addCase(deleteInviteAsync.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.user = action.payload;
       })
       .addCase(inviteUserAsync.fulfilled, (state, action) => {
         state.user = action.payload;
-        console.log(action.payload)
       })
   },
 });

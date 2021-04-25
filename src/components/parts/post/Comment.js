@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 
-import { changeDateFormat } from "../../selectors";
+import { changeDateFormat } from "../../../selectors";
 
 // Reducer
-import { selectUser } from "../../reducers/user/userSlice";
+import { selectUser } from "../../../reducers/user/userSlice";
 
 const Comment = ({ comment }) => {
     const user = useSelector(selectUser);

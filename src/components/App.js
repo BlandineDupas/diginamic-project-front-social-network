@@ -9,8 +9,8 @@ import './app.scss';
 import Navbar from 'components/parts/navbar/Navbar';
 
 import HomePage from 'components/main/homePage/HomePage';
-import Login from 'components/main/loginPage/LoginPage';
-import Register from 'components/main/registerPage/RegisterPage';
+import LoginPage from 'components/main/loginPage/LoginPage';
+import RegisterPage from 'components/main/registerPage/RegisterPage';
 import UserPage from 'components/main/userPage/UserPage';
 import FriendsPage from 'components/main/friendsPage/FriendsPage';
 import AccountPage from 'components/main/accountPage/AccountPage';
@@ -37,13 +37,13 @@ function App() {
           <Switch>
             {/* If connected, don't show login page */}
             { token && <Redirect from="/login" to="/" /> }
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginPage} />
             
             {/* If just registered, redirect to login page */}
             { registerResult.success && <Redirect from="/register" to="/login" />}
             {/* If connected, don't show register page */}
             { token && <Redirect from="/register" to="/" /> }
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/register" component={RegisterPage} />
             
             {/* If not connected, redirects all routes starting by / */}
             { !token && <Redirect from="/" to="/login" />}

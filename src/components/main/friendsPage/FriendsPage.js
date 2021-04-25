@@ -55,7 +55,6 @@ const FriendsPage = () => {
   }
 
   const answerInvite = (proposerId, status) => {
-    console.log('answerInvite')
     dispatch(answerInviteAsync({
       token,
       answer: {

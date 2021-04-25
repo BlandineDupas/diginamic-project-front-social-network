@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import PostForm from "../postForm/PostForm";
-import Wall from "../wall/Wall";
+import Wall from "../../components/parts/wall/Wall";
 
 // Styles
 import './home.scss';
@@ -19,7 +19,7 @@ import {
     selectSended,
     selectSendedMessages
 } from "../postForm/postFormSlice";
-import Message from "../message/Message";
+import Message from "../../components/parts/post/Post";
 import { clearSendedComments } from "../commentForm/commentFormSlice";
 
 const Home = ({ title, userId }) => {
