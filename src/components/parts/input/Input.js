@@ -10,7 +10,8 @@ const Input = ({
   return (
     <div className="form-field">
       <label htmlFor={inputName} className="form-field--label">{label}</label>
-      <input
+
+      { inputType === 'textarea' && <textarea
         className="form-field--input"
         type={inputType}
         name={inputName}
@@ -18,7 +19,18 @@ const Input = ({
         value={inputValue}
         onChange={(evt) => changeInputValue(evt.target.value)}
         onBlur={checkInput}
-      ></input>
+      ></textarea> }
+
+      { inputType !== 'textarea' &&<input
+        className="form-field--input"
+        type={inputType}
+        name={inputName}
+        id={inputName}
+        value={inputValue}
+        onChange={(evt) => changeInputValue(evt.target.value)}
+        onBlur={checkInput}
+      ></input> }
+      
       {error && <p className="form-field--error error">{error}</p>}
     </div>
   )

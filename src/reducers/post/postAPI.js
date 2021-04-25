@@ -15,3 +15,18 @@ export const fetchPosts = (request) => {
     )
     .then((response) => response.data) // pas besoin de json avec axios
 }
+
+export const sendPost = (request) => {
+  return fetch(
+    api + '/api/post',
+    {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + request.token
+        },
+        body: JSON.stringify(request.postData)
+    }
+)
+.then((response) => response.json(response))
+}

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 // Cmponents
 import Page from 'components/parts/page/Page';
 import Wall from 'components/parts/wall/Wall';
-import PostForm from 'features/postForm/PostForm';
+import PostForm from 'components/parts/postForm/PostForm';
 import UsersList from 'components/parts/usersList/UsersList';
 
 // Reducer

@@ -63,17 +63,17 @@ export const userSlice = createSlice({
         if (action.payload.error) state.error = action.payload.error;
         else {
           state.token = action.payload.token;
-          state.user = action.payload.user;
+          state.currentUser = action.payload.user;
         }
       })
       .addCase(answerInviteAsync.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.currentUser = action.payload;
       })
       .addCase(deleteInviteAsync.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.currentUser = action.payload;
       })
       .addCase(inviteUserAsync.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.currentUser = action.payload;
       })
   },
 });

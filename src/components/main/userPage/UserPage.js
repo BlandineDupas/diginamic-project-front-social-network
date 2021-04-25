@@ -15,6 +15,7 @@ import {
   selectCurrentUser
 } from 'reducers/user/userSlice';
 import { useEffect } from 'react';
+import PostForm from 'components/parts/postForm/PostForm';
 
 const UserPage = ({ userId }) => {
   const dispatch = useDispatch();
@@ -22,10 +23,12 @@ const UserPage = ({ userId }) => {
   const currentUser = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
 
-  if (userId !== currentUser.id) {
-    console.log('page d\'un utilisateur lambda')
-  } else {
+  let user;
+  if (userId === currentUser.id) {
     console.log('page de l\'utilisateur connecté')
+    user = currentUser;
+  } else {
+    console.log('page d\'un utilisateur lambda')
   }
 
   useEffect(() => {
@@ -36,7 +39,8 @@ const UserPage = ({ userId }) => {
   }, []);
 
   return (
-    <Page title="prénom nom">
+    <Page title={ user.firstname + ' ' + user.lastname }>
+      { (userId === currentUser.id) && <PostForm></PostForm>}
       <Wall posts={postsList}>
       </Wall>
     </Page>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import PostForm from "../postForm/PostForm";
+import PostForm from "../../components/parts/postForm/PostForm";
 import Wall from "../../components/parts/wall/Wall";
 
 // Styles
@@ -18,7 +18,7 @@ import {
     clearSendedMessages,
     selectSended,
     selectSendedMessages
-} from "../postForm/postFormSlice";
+} from "../../components/parts/postForm/postFormSlice";
 import Message from "../../components/parts/post/Post";
 import { clearSendedComments } from "../commentForm/commentFormSlice";
 
