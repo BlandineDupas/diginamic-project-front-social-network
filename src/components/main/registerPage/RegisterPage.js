@@ -32,35 +32,76 @@ const RegisterPage = () => {
   const [passwordCheckError, setPasswordCheckError] = useState('')
 
   const checkForm = (evt) => {
-      evt.preventDefault();
-      
-      checkLastname()
-      checkFirstname()
-      checkEmail()
-      checkPassword()
+    evt.preventDefault();
+    
+    checkLastname()
+    checkFirstname()
+    checkEmail()
+    checkPassword()
+    checkPasswordCheck()
+
+    if (
+      checkLastname() &&
+      checkFirstname() &&
+      checkEmail() &&
+      checkPassword() &&
       checkPasswordCheck()
-      
-      if (
-        !lastnameError &&
-        !firstnameError &&
-        !emailError &&
-        !passwordError &&
-        !passwordCheckError
-      ) {
-          dispatch(addUserAsync({
-              'lastname': lastname,
-              'firstname': firstname,
-              'password': password,
-              'email': email
-          }));
-      }
+    ) {
+      dispatch(addUserAsync({
+        'lastname': lastname,
+        'firstname': firstname,
+        'password': password,
+        'email': email
+      }));
+    }
   }
 
-  const checkLastname = () => (lastname.length < 3) ? setLastnameError('Le nom doit faire au moins 3 caractères') : setLastnameError('');
-  const checkFirstname = () => (firstname.length < 3) ? setFirstnameError('Le prénom doit faire au moins 3 caractères') : setFirstnameError('');
-  const checkEmail = () => (email.length < 4 || !email.toLowerCase().match(/^[a-z0-9]+((\.|-|_)[a-z0-9]+)*@[a-z]+\.[a-z]+/)) ? setEmailError('L\'adresse mail doit faire au moins 4 caractères et correspondre au format d\'adresse email') : setEmailError('');
-  const checkPassword = () => (password.length < 4) ? setPasswordError('Le mot de passe doit faire au moins 4 caractères') : setPasswordError('');
-  const checkPasswordCheck = () => (passwordCheck !== password) ? setPasswordCheckError('Les mots de passe doivent être identiques') : setPasswordCheckError('');
+
+  const checkLastname = () => {
+    if (lastname.length < 3) {
+      setLastnameError('Le nom doit faire au moins 3 caractères');
+      return true;
+    } else {
+      setLastnameError('');
+      return false
+    }
+  }
+  const checkFirstname = () => {
+    if (firstname.length < 3) {
+      setFirstnameError('Le prénom doit faire au moins 3 caractères');
+      return true;
+    } else {
+      setFirstnameError('');
+      return false
+    }
+  }
+  const checkEmail = () => { 
+    if (email.length < 4 || !email.toLowerCase().match(/^[a-z0-9]+((\.|-|_)[a-z0-9]+)*@[a-z]+\.[a-z]+/)) {
+      setEmailError('L\'adresse mail doit faire au moins 4 caractères et correspondre au format d\'adresse email');
+      return true;
+    } else {
+      setEmailError('');
+      return false
+    }
+  }
+  const checkPassword = () => {
+    if (password.length < 4) {
+      setPasswordError('Le mot de passe doit faire au moins 4 caractères');
+      return true;
+    } else {
+      setPasswordError('');
+      return false
+    }
+  }
+  const checkPasswordCheck = () => {
+    if (passwordCheck !== password) {
+      setPasswordCheckError('Les mots de passe doivent être identiques');
+      return true;
+    } else {
+      setPasswordCheckError('');
+      return false
+    }
+  }
 
   return (
     <Page title="Inscription" extraClass="register">
