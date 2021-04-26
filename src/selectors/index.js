@@ -14,3 +14,9 @@ export const getIdFromSlug = (slug) => {
     const splittedSlug = slug.split('_');
     return Number(splittedSlug[splittedSlug.length - 1]);
 }
+
+export const getUsersIdArray = (usersArray) => {
+  const usersIdArray = [];
+  usersArray.forEach((user) => usersIdArray.push(user.id));
+  return usersIdArray;
+}

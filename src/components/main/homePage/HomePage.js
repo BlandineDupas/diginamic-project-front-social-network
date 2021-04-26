@@ -18,6 +18,9 @@ import {
   selectPostsList
 } from 'reducers/post/postSlice';
 
+// Selectors
+import { getUsersIdArray } from 'selectors';
+
 const HomePage = () => {
   const dispatch = useDispatch();
   const postsList = useSelector(selectPostsList);
@@ -36,8 +39,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    const friendsIdArray = [];
-    currentUser.friends.forEach((friend) => friendsIdArray.push(friend.id));
+    const friendsIdArray = getUsersIdArray(currentUser.friends);
     dispatch(fetchPostsAsync({
       token,
       authorArray: friendsIdArray

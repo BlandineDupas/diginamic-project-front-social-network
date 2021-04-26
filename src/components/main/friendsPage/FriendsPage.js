@@ -17,6 +17,7 @@ import {
   deleteInviteAsync,
   inviteUserAsync,
 } from 'reducers/login/loginSlice';
+import { getUsersIdArray } from 'selectors';
 
 const FriendsPage = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,18 @@ const FriendsPage = () => {
           }
       )
       .then((response) => {
-        setSearchResult(response.data); // pas besoin de json avec axios
+        
+        const friendsAndInvites = [];
+        friendsAndInvites.push(getUsersIdArray(currentUser.friends))
+        friendsAndInvites.push(getUsersIdArray(currentUser.received_invites))
+        friendsAndInvites.push(getUsersIdArray(currentUser.proposed_invites))
+
+        let result = response.data.filter((user) => (
+          user.id !== currentUser.id
+          &&
+          !friendsAndInvites.flat().includes(user.id))
+        );
+        setSearchResult(result); // pas besoin de json avec axios
         setDisplaySearchResult(true);
       });
   }
