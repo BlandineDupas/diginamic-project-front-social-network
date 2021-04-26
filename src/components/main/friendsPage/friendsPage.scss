@@ -1,14 +1,25 @@
 @import '/src/styles/vars';
 
 .friendsPage {
-    &__subtitle {
-        grid-column: 1 / 4;
-        font-size: 1.3em;
-        margin-bottom: $gutter;
-    }
+  &__subtitle {
+    grid-column: 1 / 4;
+    font-size: 1.3em;
+    margin-bottom: $gutter;
+  }
 
-    &__invitations {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);        
+  section {
+    margin: $gutter * 2 0;
+  }
+
+  &__invitations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    
+    .usersList {
+      border-radius: 5px;
+      background-color: rgb(162, 162, 224);
+      padding: 0 $gutter $gutter;
     }
+  }
 }

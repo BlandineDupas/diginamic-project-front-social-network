@@ -1,0 +1,35 @@
+@import '/src/styles/vars';
+
+.homePage {
+  // 
+  .aside-left {
+    display: none;
+  }
+}
+
+@media(min-width: 769px) {
+  .homePage {
+    .aside-left {
+      display: block;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      margin: $gutter * 2;
+    }
+  }
+
+  .wall,
+  .postForm {
+    margin-left: 300px ;
+  }
+}
+
+@media(min-width: 1025px) {
+  .homePage {
+    max-width: 100%;
+    .wall,
+    .postForm {
+      margin-right: 300px ;
+    }
+  }
+}

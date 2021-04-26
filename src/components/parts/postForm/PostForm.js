@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 // Component
 import Input from 'components/parts/input/Input';
 
+// Styles
+import './postForm.scss';
+
 // Reducer
 import {
   selectToken,
@@ -38,7 +41,7 @@ const PostForm = () => {
   }
 
   return (
-    <form onSubmit={sendPost}>
+    <form onSubmit={sendPost} className="postForm">
       <legend>Partager quelque chose...</legend>
       <Input
         inputName="message"

@@ -1,0 +1,38 @@
+@import '/src/styles/vars';
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  legend {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 0.8em;
+    padding: $gutter $gutter 0 $gutter;
+    margin-top: $gutter;
+  }
+
+  textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    margin: $gutter 0;
+    padding: $gutter;
+    background-color: rgba(128, 128, 128, 0.247);
+  }
+
+  button {
+    padding: $gutter;
+    margin: $gutter;
+    border-radius: 5px;
+    border: none;
+    align-self: flex-end;
+    font-weight: bold;
+
+    &:hover {
+      background-color: purple;
+      color: whitesmoke;
+    }
+  }
+}
