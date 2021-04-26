@@ -33,12 +33,12 @@ const RegisterPage = () => {
 
   const checkForm = (evt) => {
     evt.preventDefault();
-    
-    checkLastname()
-    checkFirstname()
-    checkEmail()
-    checkPassword()
-    checkPasswordCheck()
+    console.log('register')
+    console.log(checkLastname())
+    console.log(checkFirstname())
+    console.log(checkEmail())
+    console.log(checkPassword())
+    console.log(checkPasswordCheck())
 
     if (
       checkLastname() &&
@@ -60,46 +60,46 @@ const RegisterPage = () => {
   const checkLastname = () => {
     if (lastname.length < 3) {
       setLastnameError('Le nom doit faire au moins 3 caractères');
-      return true;
+      return false;
     } else {
       setLastnameError('');
-      return false
+      return true
     }
   }
   const checkFirstname = () => {
     if (firstname.length < 3) {
       setFirstnameError('Le prénom doit faire au moins 3 caractères');
-      return true;
+      return false;
     } else {
       setFirstnameError('');
-      return false
+      return true
     }
   }
   const checkEmail = () => { 
     if (email.length < 4 || !email.toLowerCase().match(/^[a-z0-9]+((\.|-|_)[a-z0-9]+)*@[a-z]+\.[a-z]+/)) {
       setEmailError('L\'adresse mail doit faire au moins 4 caractères et correspondre au format d\'adresse email');
-      return true;
+      return false;
     } else {
       setEmailError('');
-      return false
+      return true
     }
   }
   const checkPassword = () => {
     if (password.length < 4) {
       setPasswordError('Le mot de passe doit faire au moins 4 caractères');
-      return true;
+      return false;
     } else {
       setPasswordError('');
-      return false
+      return true
     }
   }
   const checkPasswordCheck = () => {
     if (passwordCheck !== password) {
       setPasswordCheckError('Les mots de passe doivent être identiques');
-      return true;
+      return false;
     } else {
       setPasswordCheckError('');
-      return false
+      return true
     }
   }
 
