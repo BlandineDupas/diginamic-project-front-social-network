@@ -9,7 +9,7 @@ import {
 } from 'reducers/login/loginAPI';
 
 const initialState = {
-  token: false,
+  token: '',
   currentUser: {},
   registerResult: '',
   loginError: ''
@@ -52,6 +52,9 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
+    logout: (state) => {
+      state.token = '';
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -79,6 +82,8 @@ export const loginSlice = createSlice({
       })
   },
 });
+
+export const { logout } = loginSlice.actions;
 
 export const selectToken = (state) => state.login.token;
 export const selectCurrentUser = (state) => state.login.currentUser;
