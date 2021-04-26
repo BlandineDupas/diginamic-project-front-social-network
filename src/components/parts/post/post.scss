@@ -1,50 +1,51 @@
 @import 'src/styles/vars';
 
 .post {
+  padding: $gutter;
+  margin: $gutter;
+  background-color: rgb(168, 168, 240);
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
     padding: $gutter;
-    margin: $gutter;
-    background-color: rgb(168, 168, 240);
+    margin-bottom: $gutter;
+  }
 
-    &-header {
-        display: flex;
-        justify-content: space-between;
-        padding: $gutter;
-        margin-bottom: $gutter;
+  &-author {
+    font-weight: bold;
+  }
+
+  &-date {
+    font-style: italic;
+  }
+
+  &-content {
+    padding: $gutter;
+    background-color: rgba(255, 255, 255, 0.842);
+    border-radius: 5px;
+  }
+
+  .comment {
+    font-size: 0.9em;
+    
+    header {
+      text-align: right;
+      padding: $gutter;
     }
-
+    
     &-author {
-        font-weight: bold;
+      font-weight: bold;
     }
 
     &-date {
-        font-style: italic;
+      font-style: italic;
     }
 
     &-content {
-        padding: $gutter;
-        background-color: rgb(194, 194, 235);
+      padding: $gutter;
+      background-color: rgba(255, 255, 255, 0.541);
+      border-radius: 5px;
     }
-
-    .comment {
-        font-size: 0.9em;
-        
-        header {
-            text-align: right;
-            padding: $gutter;
-        }
-        
-        &-author {
-            font-weight: bold;
-        }
-    
-        &-date {
-            font-style: italic;
-        }
-    
-        &-content {
-            padding: $gutter;
-            background-color: rgb(194, 194, 235);
-        }
-    
-    }
+  }
 }

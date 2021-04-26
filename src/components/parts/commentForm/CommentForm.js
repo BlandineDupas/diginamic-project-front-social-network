@@ -4,18 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 // Component
 import Input from 'components/parts/input/Input';
 
+// Styles
+import './commentForm.scss';
+
 // Reducer
 import {
     selectToken,
     selectCurrentUser
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 import { sendCommentAsync } from 'reducers/post/postSlice';
 
 const CommentForm = ({ postId }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const token = useSelector(selectToken);
-    // const comments = useSelector(selectComments);
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
 
@@ -27,11 +29,9 @@ const CommentForm = ({ postId }) => {
         evt.preventDefault();
         setContent(content.trim());
         !content && setError('Vous ne pouvez pas envoyer un message vide')
-      // comments[messageId] && comments[messageId].trim().length > 0
         content && dispatch(sendCommentAsync({
               token,
               commentData : {
-                  // content: comments[messageId].trim(),
                   content,
                   authorId: currentUser.id,
                   postId
@@ -41,7 +41,7 @@ const CommentForm = ({ postId }) => {
     }
 
     return (
-        <form onSubmit={sendComment}>
+        <form onSubmit={sendComment} className="commentForm">
             <legend>Commenter...</legend>
             <Input
                 inputName="comment"
@@ -49,7 +49,6 @@ const CommentForm = ({ postId }) => {
                 inputData={content}
                 changeInputValue={setContent}
                 error={error}
-                // messageId={messageId}
             ></Input>
             <button type="submit">Envoyer</button>
         </form>

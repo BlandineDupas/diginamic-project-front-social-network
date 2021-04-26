@@ -1,0 +1,16 @@
+@import '/src/styles/vars';
+
+.button {
+  padding: $gutter;
+  margin: $gutter / 2;
+  border-radius: 5px;
+  border: none;
+
+  &.green {
+    background-color: rgba(0, 128, 0, 0.548);
+  }
+  
+  &.red {
+    background-color: rgba(255, 0, 0, 0.555);
+  }
+}

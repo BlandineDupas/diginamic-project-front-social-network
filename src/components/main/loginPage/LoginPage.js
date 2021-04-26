@@ -14,7 +14,7 @@ import {
   selectLoginError,
   selectRegisterResult,
   userLoginAsync,
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,6 @@ const LoginPage = () => {
           inputValue={password}
           changeInputValue={setPassword}
         ></Input>
-        {/* { error || loginError && <p className="error">{error}</p> } */}
         { error && <p className="error">{error}</p>}
         { (!error && loginError) && <p className="error">{loginError}</p> }
 

@@ -7,16 +7,22 @@ import Wall from 'components/parts/wall/Wall';
 import PostForm from 'components/parts/postForm/PostForm';
 import UsersList from 'components/parts/usersList/UsersList';
 
+// Styles
+import './homePage.scss';
+
 // Reducer
 import {
   answerInviteAsync,
   selectToken,
   selectCurrentUser
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 import {
   fetchPostsAsync,
   selectPostsList
 } from 'reducers/post/postSlice';
+
+// Selectors
+import { getUsersIdArray } from 'selectors';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -36,8 +42,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    const friendsIdArray = [];
-    currentUser.friends.forEach((friend) => friendsIdArray.push(friend.id));
+    const friendsIdArray = getUsersIdArray(currentUser.friends);
     dispatch(fetchPostsAsync({
       token,
       authorArray: friendsIdArray
@@ -45,30 +50,28 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Page title="Accueil">
-        <div className="home">
-          <PostForm></PostForm>
-          <aside className="aside-left">
-            <UsersList
-              title="Invitations reçues"
-              type="received_invites"
-              action={answerInvite}
-              users={currentUser.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
-              emptyMessage="Vous n'avez pas reçu d'invitation"                      
-            ></UsersList>
-            <UsersList
-              title="Mes amis"
-              type="user"
-              users={currentUser.friends}
-              emptyMessage="Vous n'avez pas encore d'ami"                      
-            ></UsersList>
-          </aside>
-          <Wall posts={postsList}>
-          </Wall>
-          <aside className="aside-right">
-            <h1>Messages privés</h1>
-          </aside>
-        </div>
+    <Page title="Accueil" extraClass="homePage">
+      <PostForm></PostForm>
+      <aside className="aside-left">
+        <UsersList
+          title="Invitations reçues"
+          type="received_invites"
+          action={answerInvite}
+          users={currentUser.received_invites.filter((invite) => invite.RECEIVED_INVITE.status === 'waiting')}
+          emptyMessage="Vous n'avez pas reçu d'invitation"                      
+        ></UsersList>
+        <UsersList
+          title="Mes amis"
+          type="user"
+          users={currentUser.friends}
+          emptyMessage="Vous n'avez pas encore d'ami"                      
+        ></UsersList>
+      </aside>
+      <Wall posts={postsList}>
+      </Wall>
+      {/* <aside className="aside-right">
+        <h1>Messages privés</h1>
+      </aside> */}
     </Page>
   );
 };
