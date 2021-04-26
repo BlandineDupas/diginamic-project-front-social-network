@@ -1,4 +1,8 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+// Selectors
+import { slugifyName } from 'selectors';
 
 // Styles
 import './userItem.scss';
@@ -6,7 +10,7 @@ import './userItem.scss';
 const UserItem = ({ user, buttons }) => {
     return (
         <div className="userItem">
-            <p className="userItem__identity">{user.firstname} {user.lastname}</p>
+            <p className="userItem__identity"><Link to={'/' + slugifyName(user.firstname, user.lastname, user.id)}>{user.firstname} {user.lastname}</Link></p>
             { buttons.map((button, key) => 
                 <button
                     className={'userItem__button ' + button.color}

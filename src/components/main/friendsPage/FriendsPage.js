@@ -16,7 +16,7 @@ import {
   answerInviteAsync,
   deleteInviteAsync,
   inviteUserAsync,
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 
 const FriendsPage = () => {
   const dispatch = useDispatch();

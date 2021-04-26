@@ -8,7 +8,7 @@ import Input from 'components/parts/input/Input';
 import {
   selectToken,
   selectCurrentUser
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 import { sendPostAsync } from 'reducers/post/postSlice';
 
 const PostForm = () => {

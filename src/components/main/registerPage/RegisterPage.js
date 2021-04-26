@@ -13,7 +13,7 @@ import './register.scss';
 import {
   addUserAsync,
   selectRegisterResult
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 
 
 const RegisterPage = () => {

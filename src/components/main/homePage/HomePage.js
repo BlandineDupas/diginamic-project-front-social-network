@@ -12,7 +12,7 @@ import {
   answerInviteAsync,
   selectToken,
   selectCurrentUser
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 import {
   fetchPostsAsync,
   selectPostsList

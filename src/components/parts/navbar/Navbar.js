@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import './navbar.scss';
 
 // Reducers
-import { selectToken, selectCurrentUser } from 'reducers/user/userSlice';
+import { selectToken, selectCurrentUser } from 'reducers/login/loginSlice';
 import { slugifyName } from 'selectors';
 
 const Navbar = () => {

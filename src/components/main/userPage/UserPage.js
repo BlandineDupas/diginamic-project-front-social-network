@@ -13,25 +13,30 @@ import {
 import {
   selectToken,
   selectCurrentUser
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 import { useEffect } from 'react';
 import PostForm from 'components/parts/postForm/PostForm';
+import { fetchUserAsync, selectUser } from 'reducers/user/userSlice';
 
 const UserPage = ({ userId }) => {
   const dispatch = useDispatch();
   const postsList = useSelector(selectPostsList);
   const currentUser = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
+  const userData = useSelector(selectUser);
 
   let user;
   if (userId === currentUser.id) {
-    console.log('page de l\'utilisateur connecté')
     user = currentUser;
   } else {
-    console.log('page d\'un utilisateur lambda')
+    user = userData;
   }
 
   useEffect(() => {
+    dispatch(fetchUserAsync({
+      token,
+      userId
+    }));
     dispatch(fetchPostsAsync({
       token,
       authorArray: [ userId ]

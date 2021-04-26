@@ -19,7 +19,7 @@ import AccountPage from 'components/main/accountPage/AccountPage';
 import {
   selectRegisterResult,
   selectToken,
-} from 'reducers/user/userSlice';
+} from 'reducers/login/loginSlice';
 
 // Selectors
 import { getIdFromSlug } from '../selectors';
