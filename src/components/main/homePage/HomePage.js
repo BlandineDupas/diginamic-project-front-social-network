@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // Cmponents
 import Page from 'components/parts/page/Page';
@@ -24,13 +24,15 @@ import {
 // Selectors
 import { getUsersIdArray } from 'selectors';
 
-const HomePage = () => {
+const HomePage = ({ socket }) => {
   const dispatch = useDispatch();
   const postsList = useSelector(selectPostsList);
   const currentUser = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
 
+  const [update, setUpdate] = useState(false)
   const answerInvite = (proposerId, status) => {
+    socket.emit('new friend', proposerId);
     dispatch(answerInviteAsync({
       token,
       answer: {
@@ -47,10 +49,24 @@ const HomePage = () => {
       token,
       authorArray: friendsIdArray
     }));
-  }, []);
+  }, [currentUser]);
 
+  useEffect(() => {
+    console.log('update', update)
+    if (update) {
+      setUpdate(false)
+    }
+  }, [update])
+
+  useEffect(() => {
+    console.log('effect update')
+    socket && socket.on('update', () => setUpdate(true))
+  }, [])
+  
   return (
     <Page title="Accueil" extraClass="homePage">
+    <button onClick={() => socket.emit('new friend')}>Update</button>
+    <button onClick={() => setUpdate(false)}>false</button>
       <PostForm></PostForm>
       <aside className="aside-left">
         <UsersList

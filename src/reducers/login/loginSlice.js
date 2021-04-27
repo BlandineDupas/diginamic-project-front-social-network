@@ -69,6 +69,7 @@ export const loginSlice = createSlice({
           state.token = action.payload.token;
           state.currentUser = action.payload.user;
           state.loginError = '';
+          state.registerResult = '';
         }
       })
       .addCase(answerInviteAsync.fulfilled, (state, action) => {

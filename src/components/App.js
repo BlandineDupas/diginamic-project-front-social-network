@@ -32,18 +32,17 @@ function App() {
   const api = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
-    // const innerSocket = socketIOClient(api, { whithCredentials: true});
-
     if (token) {
       const innerSocket = socketIOClient(api, { whithCredentials: true});
       setSocket(innerSocket);  
     } else {
       socket && socket.disconnect();
     }
-    // return () => {
-    //   innerSocket.disconnect()
-    // }
   }, [token])
+
+  useEffect(() => {
+    socket && socket.on('update', () => console.log('UPDATE'))
+  }, [socket])
 
   return (
     <div className="app">
@@ -64,7 +63,7 @@ function App() {
             { !token && <Redirect from="/" to="/login" />}
 
             {/* All other routes */}
-            <Route exact path="/" component={HomePage} />
+            <Route exact path="/" render={() => <HomePage socket={socket}></HomePage>} />
             <Route exact path="/friends" component={FriendsPage} />
             <Route exact path="/account" component={AccountPage} />
 
