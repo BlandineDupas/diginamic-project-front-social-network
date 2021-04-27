@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import socketIOClient from 'socket.io-client';
 
 // Styles
 import './app.scss';
@@ -27,6 +28,22 @@ import { getIdFromSlug } from '../selectors';
 function App() {
   const token = useSelector(selectToken);
   const registerResult = useSelector(selectRegisterResult);
+  const [socket, setSocket] = useState();
+  const api = process.env.REACT_APP_API_URL || '';
+
+  useEffect(() => {
+    // const innerSocket = socketIOClient(api, { whithCredentials: true});
+
+    if (token) {
+      const innerSocket = socketIOClient(api, { whithCredentials: true});
+      setSocket(innerSocket);  
+    } else {
+      socket && socket.disconnect();
+    }
+    // return () => {
+    //   innerSocket.disconnect()
+    // }
+  }, [token])
 
   return (
     <div className="app">
